@@ -5,7 +5,6 @@ import { signIn, signOut } from "@/auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { hashSync } from "bcrypt-ts-edge";
 import { prisma } from "@/db/prisma";
-import { Primitive } from "radix-ui/internal";
 
 // Sign in the user with credentials
 export async function signInWithCredentials(prevState: unknown, formData: FormData) {
@@ -45,7 +44,7 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
         const plainTextPassword = user.password;
         user.password = hashSync(user.password, 10);
 
-        await prisma.create({
+        await prisma.user.create({
             data: {
                 name: user.name,
                 email: user.email,
